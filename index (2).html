@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grégoire Descheemaeker — ePortfolio</title>
+<meta name="description" content="ePortfolio de Grégoire Descheemaeker, étudiant à l'ENSEEIHT, spécialisé en mécanique des fluides.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15212b; --muted:#5a6a77; --bg:#f4f8f6; --card:#ffffff; --line:#dbe6e1;
+  --side:#0c1a21; --accent:#2fb596; --accent-dark:#1f8d75; --sun:#f2b84b;
+  --radius:18px; --side-w:300px;
+  --shadow:0 10px 30px rgba(12,26,33,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Poppins','Roboto',system-ui,sans-serif;line-height:1.25;margin:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+.ico{width:1.15em;height:1.15em;flex:none}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- Sidebar ---------- */
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side-w);background:linear-gradient(180deg,#0c1a21 0%,#10252d 100%);color:#c9dde1;display:flex;flex-direction:column;align-items:center;padding:36px 22px 24px;z-index:60;overflow-y:auto;transition:transform .35s ease}
+.avatar{width:128px;height:128px;border-radius:50%;object-fit:cover;border:6px solid rgba(255,255,255,.1);box-shadow:0 0 0 2px var(--accent)}
+.side-name{margin-top:18px;font-size:1.35rem;font-weight:600;color:#fff;text-align:center;letter-spacing:.2px}
+.side-tag{margin:6px 0 0;font-size:.85rem;text-align:center;color:#8fb0b8}
+.social{display:flex;gap:10px;margin:18px 0 6px}
+.social a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.07);color:#fff;text-decoration:none;transition:.25s}
+.social a:hover{background:var(--accent);transform:translateY(-2px)}
+.nav{list-style:none;margin:22px 0 0;padding:0;width:100%}
+.nav a{display:flex;align-items:center;gap:14px;padding:11px 16px;margin:3px 0;border-radius:12px;color:#a9c3c9;text-decoration:none;font-size:.95rem;transition:.25s}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav a.active{color:#fff;background:rgba(47,181,150,.16);box-shadow:inset 3px 0 0 var(--accent)}
+.lang{margin-top:auto;padding-top:24px;display:flex;gap:4px;background:rgba(255,255,255,.07);border-radius:999px;padding:4px;position:relative}
+.sidebar .lang{margin-top:auto}
+.lang button{border:0;background:transparent;color:#a9c3c9;font:600 .8rem 'Poppins',sans-serif;letter-spacing:.06em;padding:7px 18px;border-radius:999px;cursor:pointer;transition:.25s}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#06241d}
+.side-wrap{display:flex;flex-direction:column;align-items:center;width:100%;flex:1}
+.lang-top{position:fixed;top:14px;right:14px;z-index:70;display:none;background:rgba(12,26,33,.88);backdrop-filter:blur(6px)}
+.menu-btn{position:fixed;top:14px;left:14px;z-index:70;width:44px;height:44px;border-radius:12px;border:0;background:rgba(12,26,33,.88);backdrop-filter:blur(6px);color:#fff;display:none;place-items:center;cursor:pointer}
+.menu-btn .ico{width:22px;height:22px}
+
+main{margin-left:var(--side-w)}
+.wrap{width:min(1040px,100% - 56px);margin:0 auto}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;color:#fff;padding:90px 0;
+  background:linear-gradient(180deg,rgba(7,20,26,.5) 0%,rgba(7,20,26,.78) 100%),url(assets/img/hero.jpg) center 62%/cover no-repeat;background-color:#10252d}
+.hero .hi{font-size:1.1rem;letter-spacing:.18em;text-transform:uppercase;color:#bfe9de;margin:0 0 10px}
+.hero h1{font-size:clamp(2.4rem,6.2vw,4.6rem);font-weight:700;letter-spacing:-.5px;text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.typed-line{margin:18px 0 0;font-size:clamp(1.05rem,2.4vw,1.6rem);font-weight:300;min-height:2.2em}
+.typed-line span.t{color:var(--sun);font-weight:500}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--sun);margin-left:3px;vertical-align:-.15em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:999px;font:500 .95rem 'Poppins',sans-serif;text-decoration:none;transition:.25s;border:2px solid transparent;cursor:pointer}
+.btn-primary{background:var(--accent);color:#06241d}
+.btn-primary:hover{background:#43cdad;transform:translateY(-2px)}
+.btn-ghost{border-color:rgba(255,255,255,.55);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+.hero{position:relative}
+
+/* ---------- Sections ---------- */
+section.sec{padding:100px 0}
+section.alt{background:#eaf2ef}
+.sec-head{margin-bottom:46px}
+.sec-head .kicker{display:inline-block;font:600 .78rem 'Poppins',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:10px}
+.sec-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:700}
+.sec-head h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--sun));margin-top:14px}
+.sec-head p{max-width:680px;color:var(--muted);margin:16px 0 0}
+
+.card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid rgba(12,26,33,.04)}
+.card h3{font-size:1.15rem;margin-bottom:6px}
+.card p{margin:8px 0 0;color:var(--muted)}
+.badge-ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:rgba(47,181,150,.14);color:var(--accent-dark);margin-bottom:16px}
+.badge-ico .ico{width:26px;height:26px}
+.date{display:inline-block;font:500 .8rem 'Poppins',sans-serif;color:var(--accent-dark);background:rgba(47,181,150,.13);padding:3px 12px;border-radius:999px;margin-bottom:8px}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+
+/* About */
+.about{display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:56px;align-items:center}
+.about-photo{position:relative}
+.about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:24px;box-shadow:0 24px 50px rgba(12,26,33,.2)}
+.about-photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:3px solid var(--accent);border-radius:24px;z-index:-1;opacity:.55}
+.about h3{font-size:1.6rem;margin-bottom:14px}
+.about p{color:var(--muted);margin:0 0 14px}
+.info{list-style:none;padding:0;margin:22px 0 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 26px}
+.info li{display:flex;gap:10px;align-items:flex-start}
+.info .ico{color:var(--accent-dark);margin-top:4px}
+.info strong{display:block;font:500 .78rem 'Poppins',sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.info span{word-break:break-word}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.chip{padding:7px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.88rem;font-weight:500}
+
+/* Timeline */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.col-title{display:flex;align-items:center;gap:12px;font-size:1.35rem;margin-bottom:26px}
+.col-title .badge-ico{margin:0;width:44px;height:44px}
+.timeline{position:relative;padding-left:30px;border-left:2px solid var(--line)}
+.t-item{position:relative;margin-bottom:22px}
+.t-item::before{content:"";position:absolute;left:-39px;top:30px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
+.t-item h4{font-size:1.05rem}
+.t-item em{display:block;color:var(--muted);font-style:normal;font-size:.92rem;margin-top:2px}
+.t-item ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+
+/* Mobility */
+.mobility{display:grid;grid-template-columns:1.25fr 1fr;gap:34px;align-items:stretch}
+.mobility .text p{margin:0 0 16px;color:var(--muted);font-size:1.04rem}
+.mobility .text p strong{color:var(--ink)}
+.lang-card{background:linear-gradient(160deg,#10252d,#173a40);color:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:22px}
+.lang-card h3{font-size:1.1rem;color:#bfe9de;letter-spacing:.05em}
+.lang-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.12)}
+.lang-row:last-of-type{border-bottom:0;padding-bottom:0}
+.lang-row b{font:600 1.15rem 'Poppins',sans-serif}
+.lang-row small{display:block;color:#9fc0c6}
+.level{font:700 1.2rem 'Poppins',sans-serif;background:var(--sun);color:#3a2a05;padding:6px 16px;border-radius:12px}
+.level.soft{background:rgba(255,255,255,.14);color:#fff;font-size:.85rem;font-weight:500}
+.trips{display:flex;flex-wrap:wrap;gap:10px}
+.trips .chip{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.1);border-color:transparent;color:#fff}
+
+/* Passions */
+.passions{display:grid;gap:22px;grid-template-columns:repeat(6,1fr)}
+.passions .card{grid-column:span 2}
+.passions .big{grid-column:span 4;color:#fff;border:0;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(180deg,rgba(7,20,26,.05) 20%,rgba(7,20,26,.82) 100%),url(assets/img/hero.jpg) center 18%/cover;background-color:#173a40}
+.passions .big .badge-ico{background:rgba(255,255,255,.18);color:#fff}
+.passions .big p{color:#e1efee}
+.passions .wide{grid-column:span 2}
+.sub-title{font-size:1.25rem;margin:46px 0 20px;display:flex;align-items:center;gap:12px}
+.sub-title::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* Contact / footer */
+.contact{text-align:center}
+.contact .card{max-width:640px;margin:0 auto;padding:44px 30px}
+.contact h3{font-size:1.5rem}
+footer{background:var(--side);color:#8fb0b8;text-align:center;padding:30px 20px;font-size:.88rem}
+footer a{color:#bfe9de}
+
+/* Reveal */
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}.caret{animation:none}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:none;box-shadow:0 0 60px rgba(0,0,0,.5)}
+  main{margin-left:0}
+  .menu-btn{display:grid}
+  .lang-top{display:flex}
+  .sidebar .lang{display:none}
+}
+@media (max-width:860px){
+  .about,.mobility,.cols{grid-template-columns:1fr}
+  .about-photo{max-width:340px;margin:0 auto}
+  .cols{gap:36px}
+  .passions{grid-template-columns:1fr}
+  .passions .card,.passions .big,.passions .wide{grid-column:auto}
+  section.sec{padding:76px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- Icônes (sprite) -->
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+    <symbol id="i-mountain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20l7-13 4 7 3-4 6 10z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-run" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+  </defs>
+</svg>
+
+<button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg class="ico"><use href="#i-menu"/></svg></button>
+<div class="lang lang-top" role="group" aria-label="Langue / Language">
+  <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+  <button type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="side-wrap">
+    <img class="avatar" src="assets/img/profil.jpg" alt="Grégoire Descheemaeker">
+    <h2 class="side-name">Grégoire<br>Descheemaeker</h2>
+    <p class="side-tag" data-i18n="tagline">Étudiant à l'ENSEEIHT · Mécanique des fluides</p>
+
+    <div class="social">
+      <a href="mailto:gregoire.descheemaeker@etu.toulouse-inp.fr" aria-label="Email"><svg class="ico"><use href="#i-mail"/></svg></a>
+      <!-- Pour ajouter LinkedIn / GitHub / Instagram : copie la ligne ci-dessus, change le lien et l'icône -->
+    </div>
+
+    <ul class="nav" id="nav">
+      <li><a href="#hero" class="active"><svg class="ico"><use href="#i-home"/></svg><span data-i18n="nav_home">Accueil</span></a></li>
+      <li><a href="#about"><svg class="ico"><use href="#i-user"/></svg><span data-i18n="nav_about">À propos</span></a></li>
+      <li><a href="#resume"><svg class="ico"><use href="#i-file"/></svg><span data-i18n="nav_cv">CV</span></a></li>
+      <li><a href="#mobility"><svg class="ico"><use href="#i-globe"/></svg><span data-i18n="nav_mobility">Mobilités internationales</span></a></li>
+      <li><a href="#engagement"><svg class="ico"><use href="#i-heart"/></svg><span data-i18n="nav_engagement">Engagement civique</span></a></li>
+      <li><a href="#passions"><svg class="ico"><use href="#i-mountain"/></svg><span data-i18n="nav_passions">Passions &amp; Sport</span></a></li>
+      <li><a href="#contact"><svg class="ico"><use href="#i-mail"/></svg><span data-i18n="nav_contact">Contact</span></a></li>
+    </ul>
+
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- ===== Accueil ===== -->
+  <header class="hero" id="hero">
+    <div class="wrap">
+      <p class="hi" data-i18n="hero_hi">Bonjour, je suis</p>
+      <h1>Grégoire Descheemaeker</h1>
+      <p class="typed-line"><span class="t" id="typed">Étudiant à l'ENSEEIHT</span><span class="caret" aria-hidden="true"></span></p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#resume"><svg class="ico"><use href="#i-file"/></svg><span data-i18n="hero_cta1">Découvrir mon parcours</span></a>
+        <a class="btn btn-ghost" href="#contact"><svg class="ico"><use href="#i-mail"/></svg><span data-i18n="hero_cta2">Me contacter</span></a>
+      </div>
+    </div>
+    <div class="scroll-hint" data-i18n="hero_scroll">Défiler</div>
+  </header>
+
+  <!-- ===== À propos ===== -->
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="about_kicker">Qui suis-je</span>
+        <h2 data-i18n="about_title">À propos</h2>
+      </div>
+      <div class="about">
+        <div class="about-photo reveal">
+          <img src="assets/img/portrait.jpg" alt="Grégoire sur une passerelle suspendue dans les Pyrénées" loading="lazy">
+        </div>
+        <div class="reveal">
+          <h3 data-i18n="about_h">Étudiant à l'ENSEEIHT, passionné par les écoulements et l'énergie.</h3>
+          <p data-i18n="about_p1">Étudiant à l'ENSEEIHT, spécialisé en mécanique des fluides, je m'intéresse aux phénomènes complexes liés aux écoulements afin de travailler sur le climat et d'apporter des solutions énergétiques dans le cadre du développement durable.</p>
+          <p data-i18n="about_p2">En parallèle de mes études, je donne des cours particuliers de mathématiques et de physique depuis 2025 et je m'investis dans la vie associative.</p>
+          <ul class="info">
+            <li><svg class="ico"><use href="#i-pin"/></svg><div><strong data-i18n="lbl_city">Ville</strong><span data-i18n="val_city">Toulouse / Rennes, France</span></div></li>
+            <li><svg class="ico"><use href="#i-user"/></svg><div><strong data-i18n="lbl_age">Âge</strong><span data-i18n="val_age">22 ans</span></div></li>
+            <li><svg class="ico"><use href="#i-cap"/></svg><div><strong data-i18n="lbl_level">Niveau d'étude</strong><span data-i18n="val_level">Licence 3</span></div></li>
+            <li><svg class="ico"><use href="#i-mail"/></svg><div><strong data-i18n="lbl_email">Email</strong><span><a href="mailto:gregoire.descheemaeker@etu.toulouse-inp.fr">gregoire.descheemaeker@etu.toulouse-inp.fr</a></span></div></li>
+          </ul>
+          <div class="chips">
+            <span class="chip" data-i18n="chip1">Mécanique des fluides</span>
+            <span class="chip" data-i18n="chip2">Climat</span>
+            <span class="chip" data-i18n="chip3">Énergie</span>
+            <span class="chip" data-i18n="chip4">Développement durable</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CV ===== -->
+  <section class="sec alt" id="resume">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="cv_kicker">Parcours</span>
+        <h2 data-i18n="cv_title">CV</h2>
+        <p data-i18n="cv_sub">Mon parcours scolaire et mes expériences professionnelles.</p>
+      </div>
+      <div class="cols">
+        <div class="reveal">
+          <h3 class="col-title"><span class="badge-ico"><svg class="ico"><use href="#i-cap"/></svg></span><span data-i18n="cv_edu">Parcours scolaire</span></h3>
+          <div class="timeline">
+            <div class="card t-item">
+              <span class="date" data-i18n="e1_date">2026 – Aujourd'hui</span>
+              <h4 data-i18n="e1_t">Étudiant à l'ENSEEIHT</h4>
+              <em data-i18n="e1_p">ENSEEIHT, Toulouse</em>
+            </div>
+            <div class="card t-item">
+              <span class="date">2023 – 2026</span>
+              <h4 data-i18n="e2_t">Classe préparatoire TSI</h4>
+              <em data-i18n="e2_p">Lycée Saint-Joseph La Salle, Lorient</em>
+            </div>
+            <div class="card t-item">
+              <span class="date">2022 – 2023</span>
+              <h4 data-i18n="e3_t">Baccalauréat STI2D</h4>
+              <em data-i18n="e3_p">Lycée Ozanam, Rennes</em>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <h3 class="col-title"><span class="badge-ico"><svg class="ico"><use href="#i-brief"/></svg></span><span data-i18n="cv_exp">Expériences professionnelles</span></h3>
+          <div class="timeline">
+            <div class="card t-item">
+              <span class="date" data-i18n="x1_date">Depuis 2025</span>
+              <h4 data-i18n="x1_t">Cours particuliers de mathématiques et de physique</h4>
+              <ul><li data-i18n="x1_l">Niveau lycée et inférieur</li></ul>
+            </div>
+            <div class="card t-item">
+              <span class="date" data-i18n="x2_date">Été 2023</span>
+              <h4 data-i18n="x2_t">Lavage d'endoscopes, stérilisation et brancardage</h4>
+              <em data-i18n="x2_p">Clinique de Cesson-Sévigné</em>
+            </div>
+            <div class="card t-item">
+              <span class="date" data-i18n="x3_date">Été 2022</span>
+              <h4 data-i18n="x3_t">Restauration</h4>
+              <em data-i18n="x3_p">Pizzeria Les Milles Pâtes, île d'Yeu</em>
+              <ul><li data-i18n="x3_l">Plonge, cuisine et service</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Mobilités internationales ===== -->
+  <section class="sec" id="mobility">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="mob_kicker">Ouverture au monde</span>
+        <h2 data-i18n="mob_title">Mobilités internationales</h2>
+      </div>
+      <div class="mobility">
+        <div class="text reveal">
+          <p data-i18n="mob_p1">Étant en première année d'école, je n'ai pas encore effectué de mobilité à proprement parler. J'ai cependant déjà fait plusieurs voyages en Angleterre et en Irlande afin d'améliorer mon niveau d'anglais.</p>
+          <p data-i18n="mob_p2"><strong>Mon projet :</strong> partir en mobilité dans un endroit que je ne connais pas, pour découvrir d'autres cultures et apprendre sur le monde.</p>
+          <p data-i18n="mob_p3">Ayant suivi des cours d'anglais depuis les premières classes, j'ai aujourd'hui un niveau B2. J'ai également repris l'allemand en LV2, après en avoir suivi jusqu'en terminale.</p>
+        </div>
+        <div class="lang-card reveal">
+          <h3 data-i18n="mob_langs">LANGUES</h3>
+          <div class="lang-row"><div><b data-i18n="l_en">Anglais</b><small data-i18n="l_en_s">Cours depuis les premières classes</small></div><span class="level">B2</span></div>
+          <div class="lang-row"><div><b data-i18n="l_de">Allemand</b><small data-i18n="l_de_s">Repris en LV2 après la terminale</small></div><span class="level soft">LV2</span></div>
+          <div class="trips">
+            <span class="chip"><svg class="ico"><use href="#i-pin"/></svg><span data-i18n="trip1">Angleterre</span></span>
+            <span class="chip"><svg class="ico"><use href="#i-pin"/></svg><span data-i18n="trip2">Irlande</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Engagement civique ===== -->
+  <section class="sec alt" id="engagement">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="eng_kicker">Au service des autres</span>
+        <h2 data-i18n="eng_title">Engagement civique</h2>
+        <p data-i18n="eng_sub">Je me suis engagé dans plusieurs associations au fil de ces dernières années.</p>
+      </div>
+      <div class="grid">
+        <div class="card reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-moon"/></svg></div>
+          <h3 data-i18n="g1_t">Maraudes</h3>
+          <p data-i18n="g1_p">Participation à des maraudes le soir, à la rencontre des personnes sans-abri.</p>
+        </div>
+        <div class="card reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-heart"/></svg></div>
+          <h3 data-i18n="g2_t">Personnes âgées</h3>
+          <p data-i18n="g2_p">Accompagnement de personnes âgées en maison de retraite.</p>
+        </div>
+        <div class="card reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-users"/></svg></div>
+          <h3 data-i18n="g3_t">Vie associative à l'ENSEEIHT</h3>
+          <p data-i18n="g3_p">Très investi dans la vie associative de l'école, je suis sur une liste cette année pour intégrer l'AE l'année universitaire prochaine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Passions & Sport ===== -->
+  <section class="sec" id="passions">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="pas_kicker">En dehors des cours</span>
+        <h2 data-i18n="pas_title">Passions &amp; Sport</h2>
+      </div>
+
+      <h3 class="sub-title reveal"><span data-i18n="pas_sub1">Passions</span></h3>
+      <div class="passions">
+        <div class="card big reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-mountain"/></svg></div>
+          <span class="date" style="background:rgba(255,255,255,.2);color:#fff;align-self:flex-start" data-i18n="p1_date">Toute ma vie</span>
+          <h3 data-i18n="p1_t">Pyrénéiste</h3>
+          <p data-i18n="p1_p">Depuis tout petit, je randonne dans les massifs pyrénéens. L'été, je m'y perds seul ou j'y cours avec des amis.</p>
+        </div>
+        <div class="card wide reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-book"/></svg></div>
+          <span class="date" data-i18n="p2_date">2011 – Aujourd'hui</span>
+          <h3 data-i18n="p2_t">Lecture</h3>
+          <p data-i18n="p2_p">J'ai toujours aimé lire, depuis l'école primaire. Mon objectif : retrouver un rythme plus soutenu et varier les styles.</p>
+        </div>
+      </div>
+
+      <h3 class="sub-title reveal"><span data-i18n="pas_sub2">Sport</span></h3>
+      <div class="grid">
+        <div class="card reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-run"/></svg></div>
+          <span class="date" data-i18n="s1_date">2020 – Aujourd'hui</span>
+          <h3 data-i18n="s1_t">Course à pied</h3>
+          <p data-i18n="s1_p">J'ai toujours aimé courir et j'aimerais pouvoir m'inscrire à un marathon prochainement.</p>
+        </div>
+        <div class="card reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-up"/></svg></div>
+          <span class="date" data-i18n="s2_date">2021 – Aujourd'hui</span>
+          <h3 data-i18n="s2_t">Escalade</h3>
+          <p data-i18n="s2_p">Beaucoup d'escalade en bloc et en voie, à un niveau amateur.</p>
+        </div>
+        <div class="card reveal">
+          <div class="badge-ico"><svg class="ico"><use href="#i-compass"/></svg></div>
+          <span class="date" data-i18n="s3_date">Projet</span>
+          <h3 data-i18n="s3_t">Trail</h3>
+          <p data-i18n="s3_p">Courir plusieurs trails dans les Pyrénées.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="sec alt contact" id="contact">
+    <div class="wrap">
+      <div class="card reveal">
+        <div class="badge-ico" style="margin-inline:auto"><svg class="ico"><use href="#i-mail"/></svg></div>
+        <h3 data-i18n="ct_t">Envie d'échanger ?</h3>
+        <p data-i18n="ct_p">N'hésitez pas à m'écrire, je vous répondrai avec plaisir.</p>
+        <p style="margin-top:22px"><a class="btn btn-primary" href="mailto:gregoire.descheemaeker@etu.toulouse-inp.fr"><svg class="ico"><use href="#i-mail"/></svg><span data-i18n="ct_btn">M'envoyer un email</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="year">2026</span> Grégoire Descheemaeker · <span data-i18n="foot">Tous droits réservés</span></span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  /* ---------- Traductions (le français est le texte d'origine de la page) ---------- */
+  var EN = {
+    tagline: "ENSEEIHT student · Fluid mechanics",
+    nav_home: "Home", nav_about: "About", nav_cv: "Resume", nav_mobility: "International mobility",
+    nav_engagement: "Civic engagement", nav_passions: "Passions & Sports", nav_contact: "Contact",
+    hero_hi: "Hi, I'm", hero_cta1: "See my background", hero_cta2: "Get in touch", hero_scroll: "Scroll",
+    about_kicker: "Who I am", about_title: "About",
+    about_h: "An ENSEEIHT student passionate about fluid flows and energy.",
+    about_p1: "A student at ENSEEIHT specializing in fluid mechanics, I am interested in the complex phenomena of fluid flows, with the aim of working on climate issues and contributing energy solutions for sustainable development.",
+    about_p2: "Alongside my studies, I have been tutoring mathematics and physics privately since 2025, and I am involved in student and community associations.",
+    lbl_city: "City", val_city: "Toulouse / Rennes, France",
+    lbl_age: "Age", val_age: "22",
+    lbl_level: "Level of study", val_level: "Licence 3 (3rd year of a bachelor's)",
+    lbl_email: "Email",
+    chip1: "Fluid mechanics", chip2: "Climate", chip3: "Energy", chip4: "Sustainable development",
+    cv_kicker: "Background", cv_title: "Resume", cv_sub: "My education and professional experience.",
+    cv_edu: "Education", cv_exp: "Professional experience",
+    e1_date: "2026 – Present", e1_t: "Student at ENSEEIHT", e1_p: "ENSEEIHT, Toulouse",
+    e2_t: "TSI preparatory class (CPGE)", e2_p: "Lycée Saint-Joseph La Salle, Lorient",
+    e3_t: "STI2D Baccalauréat", e3_p: "Lycée Ozanam, Rennes",
+    x1_date: "Since 2025", x1_t: "Private tutor in mathematics and physics", x1_l: "High school level and below",
+    x2_date: "Summer 2023", x2_t: "Endoscope cleaning, sterilization and patient transport", x2_p: "Clinique de Cesson-Sévigné",
+    x3_date: "Summer 2022", x3_t: "Restaurant work", x3_p: "Pizzeria Les Milles Pâtes, Île d'Yeu", x3_l: "Dishwashing, kitchen and table service",
+    mob_kicker: "Opening up to the world", mob_title: "International mobility",
+    mob_p1: "As I am in my first year at engineering school, I have not yet done an international mobility as such. However, I have already made several trips to England and Ireland to improve my English.",
+    mob_p2: "<strong>My plan:</strong> to go on a mobility period somewhere I don't know, to discover other cultures and learn about the world.",
+    mob_p3: "Having studied English since primary school, I now have a B2 level. I have also resumed German as a second foreign language, after studying it until my final year of high school.",
+    mob_langs: "LANGUAGES",
+    l_en: "English", l_en_s: "Studied since primary school",
+    l_de: "German", l_de_s: "Resumed as 2nd language after high school",
+    trip1: "England", trip2: "Ireland",
+    eng_kicker: "Serving others", eng_title: "Civic engagement",
+    eng_sub: "Over the past few years, I have been involved in several associations.",
+    g1_t: "Street outreach", g1_p: "Taking part in evening outreach rounds to meet people experiencing homelessness.",
+    g2_t: "Elderly care", g2_p: "Supporting elderly people in nursing homes.",
+    g3_t: "Student life at ENSEEIHT", g3_p: "Very involved in the school's associative life, I am on a list this year to join the student union (AE) next academic year.",
+    pas_kicker: "Beyond the classroom", pas_title: "Passions & Sports", pas_sub1: "Passions", pas_sub2: "Sports",
+    p1_date: "All my life", p1_t: "Pyrenees mountaineer",
+    p1_p: "Ever since I was little, I have been hiking in the Pyrenees. In summer, I get lost there alone or run there with friends.",
+    p2_date: "2011 – Present", p2_t: "Reading",
+    p2_p: "I have loved reading since primary school. My goal is to get back to a more regular pace and to vary the genres.",
+    s1_date: "2020 – Present", s1_t: "Running", s1_p: "I have always loved running and would like to sign up for a marathon soon.",
+    s2_date: "2021 – Present", s2_t: "Climbing", s2_p: "A lot of bouldering and route climbing, at an amateur level.",
+    s3_date: "Project", s3_t: "Trail running", s3_p: "Running several trail races in the Pyrenees.",
+    ct_t: "Want to get in touch?", ct_p: "Feel free to write to me, I'll be happy to reply.", ct_btn: "Send me an email",
+    foot: "All rights reserved"
+  };
+  var TYPED = {
+    fr: ["Étudiant à l'ENSEEIHT", "Passionné de mécanique des fluides", "Professeur particulier", "Pyrénéiste"],
+    en: ["ENSEEIHT student", "Fluid mechanics enthusiast", "Private tutor", "Pyrenees mountaineer"]
+  };
+  var TITLE = { fr: "Grégoire Descheemaeker — ePortfolio", en: "Grégoire Descheemaeker — ePortfolio" };
+
+  var lang = "fr";
+  var nodes = document.querySelectorAll("[data-i18n]");
+  nodes.forEach(function (el) { el.setAttribute("data-fr", el.innerHTML); });
+
+  /* ---------- Effet « machine à écrire » ---------- */
+  var typedEl = document.getElementById("typed");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var tIdx = 0, cIdx = 0, deleting = false, timer = null;
+  function type() {
+    var word = TYPED[lang][tIdx];
+    if (reduce) { typedEl.textContent = word; return; }
+    cIdx += deleting ? -1 : 1;
+    typedEl.textContent = word.slice(0, cIdx);
+    var delay = deleting ? 35 : 75;
+    if (!deleting && cIdx === word.length) { deleting = true; delay = 1600; }
+    else if (deleting && cIdx === 0) { deleting = false; tIdx = (tIdx + 1) % TYPED[lang].length; delay = 350; }
+    timer = setTimeout(type, delay);
+  }
+  function restartTyped() { clearTimeout(timer); tIdx = 0; cIdx = 0; deleting = false; type(); }
+
+  /* ---------- Changement de langue ---------- */
+  function setLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    document.title = TITLE[l];
+    nodes.forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      el.innerHTML = (l === "en" && EN[key] !== undefined) ? EN[key] : el.getAttribute("data-fr");
+    });
+    document.querySelectorAll("[data-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === l ? "true" : "false");
+    });
+    try { localStorage.setItem("lang", l); } catch (e) {}
+    restartTyped();
+  }
+  document.querySelectorAll("[data-lang]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  var fromUrl = (location.search.match(/[?&]lang=(fr|en)/) || [])[1];
+  var start = fromUrl || saved || "fr";
+  if (start === "en") setLang("en"); else { restartTyped(); }
+
+  /* ---------- Menu mobile ---------- */
+  var sidebar = document.getElementById("sidebar");
+  var menuBtn = document.getElementById("menuBtn");
+  function closeMenu() { sidebar.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); menuBtn.innerHTML = '<svg class="ico"><use href="#i-menu"/></svg>'; }
+  menuBtn.addEventListener("click", function () {
+    var open = sidebar.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.innerHTML = '<svg class="ico"><use href="#' + (open ? "i-x" : "i-menu") + '"/></svg>';
+  });
+  document.querySelectorAll("#nav a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+
+  /* ---------- Lien actif dans le menu + apparition au défilement ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll("#nav a"));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  function onScroll() {
+    var y = window.scrollY + window.innerHeight * 0.35, current = 0;
+    sections.forEach(function (s, i) { if (s && s.offsetTop <= y) current = i; });
+    links.forEach(function (a, i) { a.classList.toggle("active", i === current); });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else { reveals.forEach(function (el) { el.classList.add("in"); }); }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
